@@ -805,8 +805,26 @@
             lateTime: "15:00",  // Batas terlambat
             endTime: "15:00",   // Waktu tutup absen
             // Masukkan URL Google Apps Script Anda di sini
-            googleSheetUrl: "https://script.google.com/macros/s/AKfycbw6zdYJE5G7I6skJF_fnJm_fP31IIdIMZm4wiwwRDMc80B1TBS6HV2fcWB_N8g8buQKFA/exec" 
+            googleSheetUrl: "https://script.google.com/macros/s/AKfycbyphyNhSNmlY5G7GpSAqhwujUpyxHY-8n6DbQ-1yWjfR6_eJU-CwXRWz1hPSHDZWlLKeA/exec" 
         };
+        const kirimData = async (dataPresensi) => {
+    try {
+        const response = await fetch(CONFIG.googleSheetUrl, {
+            method: 'POST',
+            mode: 'no-cors', // Penting agar tidak terblokir oleh browser
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataPresensi)
+        });
+        
+        // Catatan: Jika menggunakan 'no-cors', response.json() tidak akan bisa dibaca.
+        // Cukup pastikan tidak ada error di catch.
+        alert("Berhasil!");
+    } catch (error) {
+        console.error("Gagal kirim:", error);
+    }
+};
 
         // ==========================================
         // 2. KOMPONEN UTAMA (APP)
